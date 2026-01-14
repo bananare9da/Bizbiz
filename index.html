@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy bizbizday 💖</title>
+
+<style>
+/* ------------------- Body ------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #0b0b1e, #000);
+  color: white;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* ------------------- Stars ------------------- */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite;
+}
+@keyframes twinkle {
+  0%,100%{opacity:0;}
+  50%{opacity:1;}
+}
+
+/* ------------------- Container ------------------- */
+.container {
+  position: relative;
+  z-index: 10;
+  padding-top: 50px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #ff4d6d;
+  text-shadow: 0 0 15px #ff4d6d;
+}
+
+img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  margin-bottom: 20px;
+}
+
+/* ------------------- Intro Text ------------------- */
+.intro-text {
+  max-width:600px;
+  margin:20px auto;
+  font-size:1.2rem;
+  line-height:1.6;
+  color:#fff;
+  text-shadow:0 0 5px #ff4d6d;
+}
+
+/* ------------------- Buttons ------------------- */
+.gift-button {
+  display: block;
+  margin: 15px auto;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  background: #ff4d6d;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255,77,109,0.6);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.gift-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255,77,109,1);
+}
+
+/* Different button styles */
+.poetry { background: #ff6b81; }
+.story { background: #fcd34d; color: #000; }
+.reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.secret { background: #6a0dad; }
+.lucky { background: gold; color: black; }
+
+/* ------------------- Candles ------------------- */
+.cake {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 20px auto;
+  max-width: 280px;
+}
+
+.candle {
+  width: 10px;
+  height: 40px;
+  background: linear-gradient(#ffb703, #fb8500);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.flame {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 14px;
+  background: radial-gradient(circle, #ffd166, #ff8800);
+  border-radius: 50% 50% 50% 50%;
+  animation: flicker 0.2s infinite alternate;
+  box-shadow: 0 0 10px rgba(255,200,100,0.9);
+}
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(1); opacity: 0.9; }
+  to { transform: translateX(-50%) scale(1.15); opacity: 1; }
+}
+
+/* ------------------- Smoke ------------------- */
+.smoke {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #ccc, transparent);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: rise 2s forwards;
+  pointer-events: none;
+}
+@keyframes rise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.6; }
+  50% { opacity: 0.4; }
+  100% { transform: translateY(-60px) scale(1); opacity: 0; }
+}
+
+/* ------------------- Lucky Video Overlay ------------------- */
+#luckyVideoOverlay {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+#luckyVideoOverlay.show {
+  display: flex;
+  opacity: 1;
+}
+#luckyVideoOverlay video {
+  max-width:90%;
+  max-height:90%;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Happy 23rd, Katkouta 💖</h1>
+
+<img src="Us.jpg" alt="Us 💕">
+
+<!-- 🎂 23 Candles -->
+<div class="cake" id="cake"></div>
+
+<!-- ------------------- Intro Text ------------------- -->
+<div class="intro-text">
+  note:shake your phone :).....................
+  
+  Since we cannot meet, this is my virtual gift to you.<br><br>
+  I wanted something physical, but this is what I could give without holding back.<br><br>
+  Every year matters.<br>
+  So do you.
+</div>
+
+<!-- 💌 Gift buttons -->
+<a href="https://docs.google.com/document/d/1Lt8xaQHEnwsDcisuQUpw1Koa3Ix7w3FZJg90FKUZ6lc/edit?usp=drivesdk" target="_blank" class="gift-button poetry">A shitty book</a>
+<a href="https://amapof.us/map?mou=c2de91a8-aa47-4f8b-9224-ab949def7dfd" target="_blank" class="gift-button story">The beginning of a story</a>
+<a href="https://www.instagram.com/reel/DSk6MniAhhm/?igsh=MWtpamVwamc0cGdpZw==" target="_blank" class="gift-button reel">A reel I felt / couldn't say</a>
+<a href="secret.html" class="gift-button secret">Your secret gift</a>
+<button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play music 💖</button>
+<button class="gift-button lucky" onclick="playLucky()">🎉 Lucky Dip 🎉</button>
+
+</div>
+
+<audio id="music" src="birthday.mp3"></audio>
+
+<!-- Lucky Video Overlay -->
+<div id="luckyVideoOverlay">
+  <video id="luckyVideo" src="surprise.mp4"></video>
+</div>
+
+<script>
+/* 🎵 Play music */
+function playMusic() {
+  const music = document.getElementById("music");
+  music.play();
+}
+
+/* ✨ Floating stars */
+function createStar() {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.style.left = Math.random() * 100 + 'vw';
+  star.style.top = Math.random() * 100 + 'vh';
+  document.body.appendChild(star);
+  setTimeout(()=>star.remove(), 5000);
+}
+setInterval(createStar, 200);
+
+/* 🎂 Create 23 candles */
+const cake = document.getElementById("cake");
+for(let i=0;i<23;i++){
+  const candle = document.createElement('div');
+  candle.className = 'candle';
+  const flame = document.createElement('div');
+  flame.className = 'flame';
+  candle.appendChild(flame);
+  cake.appendChild(candle);
+
+  // Tap to blow out
+  candle.addEventListener('click', () => blowCandle(flame, candle));
+}
+
+// Blow candle function
+function blowCandle(flame, candle) {
+  flame.style.display = 'none';
+  createSmoke(candle);
+}
+
+// Shake to blow
+if(window.DeviceMotionEvent){
+  let lastX=0, lastY=0, lastZ=0;
+  window.addEventListener('devicemotion', event => {
+    const acc = event.accelerationIncludingGravity;
+    const delta = Math.abs(acc.x-lastX)+Math.abs(acc.y-lastY)+Math.abs(acc.z-lastZ);
+    if(delta > 25){
+      document.querySelectorAll('.flame').forEach((flame, i)=>{
+        if(flame.style.display !== 'none'){
+          flame.style.display='none';
+          createSmoke(flame.parentElement);
+        }
+      });
+    }
+    lastX=acc.x; lastY=acc.y; lastZ=acc.z;
+  });
+}
+
+// Smoke
+function createSmoke(candle){
+  const smoke = document.createElement('div');
+  smoke.className='smoke';
+  const rect = candle.getBoundingClientRect();
+  smoke.style.left = rect.left + rect.width/2 + 'px';
+  smoke.style.top = rect.top + 'px';
+  document.body.appendChild(smoke);
+  setTimeout(()=>smoke.remove(),2000);
+}
+
+/* Lucky Dip video with cinematic fade */
+function playLucky(){
+  const overlay = document.getElementById('luckyVideoOverlay');
+  const video = document.getElementById('luckyVideo');
+  overlay.classList.add('show');
+  video.currentTime = 0;
+  video.play();
+  video.style.opacity = 0;
+  
+  // Fade-in
+  let fadeIn = setInterval(()=>{
+    let op = parseFloat(video.style.opacity);
+    if(op<1) video.style.opacity = op + 0.05;
+    else clearInterval(fadeIn);
+  },50);
+  
+  video.onended = () => {
+    // Fade-out
+    let fadeOut = setInterval(()=>{
+      let op = parseFloat(video.style.opacity);
+      if(op>0) video.style.opacity = op - 0.05;
+      else {
+        clearInterval(fadeOut);
+        overlay.classList.remove('show');
+      }
+    },50);
+  };
+}
+</script>
+
+</body>
+</html>
