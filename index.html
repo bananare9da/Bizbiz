@@ -91,7 +91,7 @@ img {
 .reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .secret { background: #6a0dad; }
 .lucky { background: gold; color: black; }
-.last { background: #00d1ff; color: black; }
+.last { background: #00bfff; }
 
 /* ------------------- Candles ------------------- */
 .cake {
@@ -146,8 +146,8 @@ img {
   100% { transform: translateY(-60px) scale(1); opacity: 0; }
 }
 
-/* ------------------- Video Overlay ------------------- */
-#videoOverlay {
+/* ------------------- Lucky Video Overlay ------------------- */
+#luckyVideoOverlay, #lastVideoOverlay {
   display: none;
   position: fixed;
   top:0;
@@ -161,11 +161,11 @@ img {
   opacity: 0;
   transition: opacity 1s ease;
 }
-#videoOverlay.show {
+#luckyVideoOverlay.show, #lastVideoOverlay.show {
   display: flex;
   opacity: 1;
 }
-#videoOverlay video {
+#luckyVideoOverlay video, #lastVideoOverlay video {
   max-width:90%;
   max-height:90%;
 }
@@ -185,7 +185,7 @@ img {
 
 <!-- ------------------- Intro Text ------------------- -->
 <div class="intro-text">
-  note:shake your phone :).....................
+  note: shake your phone :) .....................
   
   Since we cannot meet, this is my virtual gift to you.<br><br>
   I wanted something physical, but I know that the idea of us meeting is repulsive to you. therefore this is what I could give without you holding back.<br><br>
@@ -200,15 +200,20 @@ img {
 <a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
 <button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
 <button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
-<button class="gift-button last" onclick="playLast()">open me last 🎬</button>
+<button class="gift-button last" onclick="playLast()">open me last</button>
 
 </div>
 
 <audio id="music" src="birthday.mp3"></audio>
 
-<!-- Video Overlay -->
-<div id="videoOverlay">
-  <video id="videoPlayer" src="Goodbye_Last.mp4" controls></video>
+<!-- Lucky Video Overlay -->
+<div id="luckyVideoOverlay">
+  <video id="luckyVideo" src="surprise.mp4"></video>
+</div>
+
+<!-- Last Video Overlay -->
+<div id="lastVideoOverlay">
+  <video id="lastVideo" src="https://drive.google.com/uc?export=download&id=1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE" controls></video>
 </div>
 
 <script>
@@ -239,7 +244,6 @@ for(let i=0;i<23;i++){
   candle.appendChild(flame);
   cake.appendChild(candle);
 
-  // Tap to blow out
   candle.addEventListener('click', () => blowCandle(flame, candle));
 }
 
@@ -278,23 +282,21 @@ function createSmoke(candle){
   setTimeout(()=>smoke.remove(),2000);
 }
 
-/* Lucky Dip video */
+/* Lucky Dip video with cinematic fade */
 function playLucky(){
-  const overlay = document.getElementById('videoOverlay');
-  const video = document.getElementById('videoPlayer');
-  video.src = "surprise.mp4";
+  const overlay = document.getElementById('luckyVideoOverlay');
+  const video = document.getElementById('luckyVideo');
   overlay.classList.add('show');
   video.currentTime = 0;
   video.play();
   video.style.opacity = 0;
-  
-  // Fade-in
+
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
     if(op<1) video.style.opacity = op + 0.05;
     else clearInterval(fadeIn);
   },50);
-  
+
   video.onended = () => {
     let fadeOut = setInterval(()=>{
       let op = parseFloat(video.style.opacity);
@@ -307,17 +309,15 @@ function playLucky(){
   };
 }
 
-/* Last video button */
+/* Last video overlay function */
 function playLast(){
-  const overlay = document.getElementById('videoOverlay');
-  const video = document.getElementById('videoPlayer');
-  video.src = "Goodbye_Last.mp4";
+  const overlay = document.getElementById('lastVideoOverlay');
+  const video = document.getElementById('lastVideo');
   overlay.classList.add('show');
   video.currentTime = 0;
   video.play();
   video.style.opacity = 0;
 
-  // Fade-in
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
     if(op<1) video.style.opacity = op + 0.05;
