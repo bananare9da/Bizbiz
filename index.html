@@ -6,6 +6,7 @@
 <title>Happy bizbizday 💖</title>
 
 <style>
+/* ------------------- Body ------------------- */
 body {
   margin: 0;
   padding: 0;
@@ -16,6 +17,7 @@ body {
   text-align: center;
 }
 
+/* ------------------- Stars ------------------- */
 .star {
   position: absolute;
   width: 3px;
@@ -30,6 +32,7 @@ body {
   50%{opacity:1;}
 }
 
+/* ------------------- Container ------------------- */
 .container {
   position: relative;
   z-index: 10;
@@ -51,6 +54,7 @@ img {
   margin-bottom: 20px;
 }
 
+/* ------------------- Intro Text ------------------- */
 .intro-text {
   max-width:600px;
   margin:20px auto;
@@ -60,6 +64,7 @@ img {
   text-shadow:0 0 5px #ff4d6d;
 }
 
+/* ------------------- Buttons ------------------- */
 .gift-button {
   display: block;
   margin: 15px auto;
@@ -80,13 +85,15 @@ img {
   box-shadow: 0 0 25px rgba(255,77,109,1);
 }
 
+/* Different button styles */
 .poetry { background: #ff6b81; }
 .story { background: #fcd34d; color: #000; }
 .reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .secret { background: #6a0dad; }
 .lucky { background: gold; color: black; }
-.last { background: #00ced1; color: black; }
+.last { background: #1e90ff; }
 
+/* ------------------- Candles ------------------- */
 .cake {
   display: flex;
   justify-content: center;
@@ -122,6 +129,7 @@ img {
   to { transform: translateX(-50%) scale(1.15); opacity: 1; }
 }
 
+/* ------------------- Smoke ------------------- */
 .smoke {
   position: absolute;
   width: 6px;
@@ -137,6 +145,28 @@ img {
   50% { opacity: 0.4; }
   100% { transform: translateY(-60px) scale(1); opacity: 0; }
 }
+
+/* ------------------- Video Overlay ------------------- */
+#videoOverlay {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#videoOverlay iframe {
+  width: 90%;
+  height: 90%;
+  border: none;
+}
+#videoOverlay.show {
+  display: flex;
+}
 </style>
 </head>
 
@@ -148,8 +178,10 @@ img {
 
 <img src="Us.jpg" alt="Us 💕">
 
+<!-- 🎂 23 Candles -->
 <div class="cake" id="cake"></div>
 
+<!-- ------------------- Intro Text ------------------- -->
 <div class="intro-text">
   note:shake your phone :).....................
   
@@ -159,25 +191,32 @@ img {
   So do you.
 </div>
 
+<!-- 💌 Gift buttons -->
 <a href="https://docs.google.com/document/d/1Lt8xaQHEnwsDcisuQUpw1Koa3Ix7w3FZJg90FKUZ6lc/edit?usp=drivesdk" target="_blank" class="gift-button poetry">THE book</a>
 <a href="https://amapof.us/map?mou=c2de91a8-aa47-4f8b-9224-ab949def7dfd" target="_blank" class="gift-button story">The beginning of the story</a>
 <a href="https://www.instagram.com/reel/DSk6MniAhhm/?igsh=MWtpamVwamc0cGdpZw==" target="_blank" class="gift-button reel">He said it not me 🤷🏽‍♂️</a>
 <a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
 <button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
 <button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
-<!-- New Last Button -->
-<a href="https://drive.google.com/file/d/1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE/view?usp=drivesdk" target="_blank" class="gift-button last">open me last 🎬</a>
+<button class="gift-button last" onclick="openLast()">open me last 🎬</button>
 
 </div>
 
 <audio id="music" src="birthday.mp3"></audio>
 
+<!-- ------------------- Video Overlay ------------------- -->
+<div id="videoOverlay">
+  <iframe id="lastVideo" src="" allowfullscreen></iframe>
+</div>
+
 <script>
+/* 🎵 Play music */
 function playMusic() {
   const music = document.getElementById("music");
   music.play();
 }
 
+/* ✨ Floating stars */
 function createStar() {
   const star = document.createElement('div');
   star.className = 'star';
@@ -188,6 +227,7 @@ function createStar() {
 }
 setInterval(createStar, 200);
 
+/* 🎂 Create 23 candles */
 const cake = document.getElementById("cake");
 for(let i=0;i<23;i++){
   const candle = document.createElement('div');
@@ -197,21 +237,24 @@ for(let i=0;i<23;i++){
   candle.appendChild(flame);
   cake.appendChild(candle);
 
+  // Tap to blow out
   candle.addEventListener('click', () => blowCandle(flame, candle));
 }
 
+// Blow candle function
 function blowCandle(flame, candle) {
   flame.style.display = 'none';
   createSmoke(candle);
 }
 
+// Shake to blow
 if(window.DeviceMotionEvent){
   let lastX=0, lastY=0, lastZ=0;
   window.addEventListener('devicemotion', event => {
     const acc = event.accelerationIncludingGravity;
     const delta = Math.abs(acc.x-lastX)+Math.abs(acc.y-lastY)+Math.abs(acc.z-lastZ);
     if(delta > 25){
-      document.querySelectorAll('.flame').forEach((flame, i)=>{
+      document.querySelectorAll('.flame').forEach((flame)=>{
         if(flame.style.display !== 'none'){
           flame.style.display='none';
           createSmoke(flame.parentElement);
@@ -222,6 +265,7 @@ if(window.DeviceMotionEvent){
   });
 }
 
+// Smoke
 function createSmoke(candle){
   const smoke = document.createElement('div');
   smoke.className='smoke';
@@ -232,32 +276,29 @@ function createSmoke(candle){
   setTimeout(()=>smoke.remove(),2000);
 }
 
-/* Lucky video button (keeps existing functionality) */
+/* 🎥 Lucky button overlay (previous) */
 function playLucky(){
-  const overlay = document.getElementById('luckyVideoOverlay');
-  const video = document.getElementById('luckyVideo');
+  const overlay = document.getElementById('videoOverlay');
+  const iframe = document.getElementById('lastVideo');
+  iframe.src = "https://drive.google.com/file/d/1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE/preview"; // previous surprise link can go here if needed
   overlay.classList.add('show');
-  video.currentTime = 0;
-  video.play();
-  video.style.opacity = 0;
-
-  let fadeIn = setInterval(()=>{
-    let op = parseFloat(video.style.opacity);
-    if(op<1) video.style.opacity = op + 0.05;
-    else clearInterval(fadeIn);
-  },50);
-
-  video.onended = () => {
-    let fadeOut = setInterval(()=>{
-      let op = parseFloat(video.style.opacity);
-      if(op>0) video.style.opacity = op - 0.05;
-      else {
-        clearInterval(fadeOut);
-        overlay.classList.remove('show');
-      }
-    },50);
-  };
 }
+
+/* 🎬 Open me last button overlay */
+function openLast(){
+  const overlay = document.getElementById('videoOverlay');
+  const iframe = document.getElementById('lastVideo');
+  iframe.src = "https://drive.google.com/file/d/1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE/preview"; // your final Google Drive video
+  overlay.classList.add('show');
+}
+
+/* Click outside to close overlay */
+document.getElementById('videoOverlay').addEventListener('click',()=>{
+  const overlay = document.getElementById('videoOverlay');
+  const iframe = document.getElementById('lastVideo');
+  overlay.classList.remove('show');
+  iframe.src = ""; // stop video
+});
 </script>
 
 </body>
