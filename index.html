@@ -91,7 +91,7 @@ img {
 .reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .secret { background: #6a0dad; }
 .lucky { background: gold; color: black; }
-.last { background: #00ccff; color: black; }
+.lastvideo { background: #00d4ff; color: black; }
 
 /* ------------------- Candles ------------------- */
 .cake {
@@ -185,10 +185,10 @@ img {
 
 <!-- ------------------- Intro Text ------------------- -->
 <div class="intro-text">
-  note:shake your phone :).....................
-  
+  note: shake your phone :).....................
+  <br><br>
   Since we cannot meet, this is my virtual gift to you.<br><br>
-  I wanted something physical, but I know that the idea of us meeting may seem repulsive to you. therefore this is what I could give without you holding back.<br><br>
+  I wanted something physical, but I know that the idea of us meeting is repulsive to you. therefore this is what I could give without you holding back.<br><br>
   Every year matters.<br>
   So do you.
 </div>
@@ -200,7 +200,7 @@ img {
 <a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
 <button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
 <button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
-<button class="gift-button last" onclick="playLast()">open me last</button>
+<button class="gift-button lastvideo" onclick="playLastVideo()">open me last</button>
 
 </div>
 
@@ -208,12 +208,12 @@ img {
 
 <!-- Lucky Video Overlay -->
 <div id="luckyVideoOverlay">
-  <video id="luckyVideo" src="surprise.mp4" type="video/mp4"></video>
+  <video id="luckyVideo" src="surprise.mp4"></video>
 </div>
 
 <!-- Last Video Overlay -->
 <div id="lastVideoOverlay">
-  <video id="lastVideo" src="Goodbye.mp4" type="video/mp4"></video>
+  <video id="lastVideo" src="goodbye.mp4"></video>
 </div>
 
 <script>
@@ -283,7 +283,7 @@ function createSmoke(candle){
   setTimeout(()=>smoke.remove(),2000);
 }
 
-/* Lucky Dip video overlay */
+/* Lucky Dip video with cinematic fade */
 function playLucky(){
   const overlay = document.getElementById('luckyVideoOverlay');
   const video = document.getElementById('luckyVideo');
@@ -292,6 +292,7 @@ function playLucky(){
   video.play();
   video.style.opacity = 0;
   
+  // Fade-in
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
     if(op<1) video.style.opacity = op + 0.05;
@@ -299,6 +300,7 @@ function playLucky(){
   },50);
   
   video.onended = () => {
+    // Fade-out
     let fadeOut = setInterval(()=>{
       let op = parseFloat(video.style.opacity);
       if(op>0) video.style.opacity = op - 0.05;
@@ -310,22 +312,24 @@ function playLucky(){
   };
 }
 
-/* Last video overlay */
-function playLast(){
+/* Last Video button */
+function playLastVideo(){
   const overlay = document.getElementById('lastVideoOverlay');
   const video = document.getElementById('lastVideo');
   overlay.classList.add('show');
   video.currentTime = 0;
   video.play();
   video.style.opacity = 0;
-  
+
+  // Fade-in
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
     if(op<1) video.style.opacity = op + 0.05;
     else clearInterval(fadeIn);
   },50);
-  
+
   video.onended = () => {
+    // Fade-out
     let fadeOut = setInterval(()=>{
       let op = parseFloat(video.style.opacity);
       if(op>0) video.style.opacity = op - 0.05;
