@@ -91,7 +91,7 @@ img {
 .reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .secret { background: #6a0dad; }
 .lucky { background: gold; color: black; }
-.lastvideo { background: #00d4ff; color: black; }
+.last { background: #00bfff; color: black; }
 
 /* ------------------- Candles ------------------- */
 .cake {
@@ -147,7 +147,7 @@ img {
 }
 
 /* ------------------- Video Overlays ------------------- */
-#luckyVideoOverlay, #lastVideoOverlay {
+.videoOverlay {
   display: none;
   position: fixed;
   top:0;
@@ -161,13 +161,18 @@ img {
   opacity: 0;
   transition: opacity 1s ease;
 }
-#luckyVideoOverlay.show, #lastVideoOverlay.show {
+.videoOverlay.show {
   display: flex;
   opacity: 1;
 }
-#luckyVideoOverlay video, #lastVideoOverlay video {
+.videoOverlay video {
   max-width:90%;
   max-height:90%;
+}
+.videoOverlay .errorMsg {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
 }
 </style>
 </head>
@@ -185,7 +190,7 @@ img {
 
 <!-- ------------------- Intro Text ------------------- -->
 <div class="intro-text">
-  note: shake your phone :).....................
+  note:shake your phone :).....................
   <br><br>
   Since we cannot meet, this is my virtual gift to you.<br><br>
   I wanted something physical, but I know that the idea of us meeting is repulsive to you. therefore this is what I could give without you holding back.<br><br>
@@ -199,21 +204,17 @@ img {
 <a href="https://www.instagram.com/reel/DSk6MniAhhm/?igsh=MWtpamVwamc0cGdpZw==" target="_blank" class="gift-button reel">He said it not me 🤷🏽‍♂️</a>
 <a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
 <button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
-<button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
-<button class="gift-button lastvideo" onclick="playLastVideo()">open me last</button>
+<button class="gift-button lucky" onclick="playLucky('surprise.mp4')">🎉 just how??? 🎉</button>
+<button class="gift-button last" onclick="playLucky('goodbye.mp4')">open me last</button>
 
 </div>
 
 <audio id="music" src="birthday.mp3"></audio>
 
-<!-- Lucky Video Overlay -->
-<div id="luckyVideoOverlay">
-  <video id="luckyVideo" src="surprise.mp4"></video>
-</div>
-
-<!-- Last Video Overlay -->
-<div id="lastVideoOverlay">
-  <video id="lastVideo" src="goodbye.mp4"></video>
+<!-- Lucky / Goodbye Video Overlay -->
+<div id="videoOverlay" class="videoOverlay">
+  <video id="videoPlayer" controls></video>
+  <div class="errorMsg" style="display:none;">⚠️ Video not found. Make sure the file is in the same folder as this HTML ⚠️</div>
 </div>
 
 <script>
@@ -283,62 +284,25 @@ function createSmoke(candle){
   setTimeout(()=>smoke.remove(),2000);
 }
 
-/* Lucky Dip video with cinematic fade */
-function playLucky(){
-  const overlay = document.getElementById('luckyVideoOverlay');
-  const video = document.getElementById('luckyVideo');
+/* 🎥 Play Lucky / Goodbye videos */
+function playLucky(videoFile){
+  const overlay = document.getElementById('videoOverlay');
+  const video = document.getElementById('videoPlayer');
+  const errorMsg = overlay.querySelector('.errorMsg');
+
+  video.src = videoFile;
+  video.style.display = 'block';
+  errorMsg.style.display = 'none';
+
   overlay.classList.add('show');
   video.currentTime = 0;
-  video.play();
-  video.style.opacity = 0;
-  
-  // Fade-in
-  let fadeIn = setInterval(()=>{
-    let op = parseFloat(video.style.opacity);
-    if(op<1) video.style.opacity = op + 0.05;
-    else clearInterval(fadeIn);
-  },50);
-  
-  video.onended = () => {
-    // Fade-out
-    let fadeOut = setInterval(()=>{
-      let op = parseFloat(video.style.opacity);
-      if(op>0) video.style.opacity = op - 0.05;
-      else {
-        clearInterval(fadeOut);
-        overlay.classList.remove('show');
-      }
-    },50);
-  };
-}
+  video.play().catch(()=>{
+    // If video fails
+    video.style.display = 'none';
+    errorMsg.style.display = 'block';
+  });
 
-/* Last Video button */
-function playLastVideo(){
-  const overlay = document.getElementById('lastVideoOverlay');
-  const video = document.getElementById('lastVideo');
-  overlay.classList.add('show');
-  video.currentTime = 0;
-  video.play();
-  video.style.opacity = 0;
-
-  // Fade-in
-  let fadeIn = setInterval(()=>{
-    let op = parseFloat(video.style.opacity);
-    if(op<1) video.style.opacity = op + 0.05;
-    else clearInterval(fadeIn);
-  },50);
-
-  video.onended = () => {
-    // Fade-out
-    let fadeOut = setInterval(()=>{
-      let op = parseFloat(video.style.opacity);
-      if(op>0) video.style.opacity = op - 0.05;
-      else {
-        clearInterval(fadeOut);
-        overlay.classList.remove('show');
-      }
-    },50);
-  };
+  video.onended = () => overlay.classList.remove('show');
 }
 </script>
 
