@@ -91,17 +91,11 @@ img {
 .reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .secret { background: #6a0dad; }
 .lucky { background: gold; color: black; }
-/* New “open me last” button */
-.last {
-  background: linear-gradient(45deg, #ff4d6d, #ffb347, #ff6b81);
-  color: white;
-  border: none;
-  box-shadow: 0 0 20px rgba(255,77,109,0.8);
-  transition: all 0.3s ease;
-}
-.last:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 30px rgba(255,77,109,1), 0 0 50px rgba(255,183,71,0.7);
+.last { background: #00d4ff; color: #000; animation: pulse 2s infinite; }
+@keyframes pulse {
+  0%{box-shadow:0 0 10px #00d4ff;}
+  50%{box-shadow:0 0 25px #00d4ff;}
+  100%{box-shadow:0 0 10px #00d4ff;}
 }
 
 /* ------------------- Candles ------------------- */
@@ -158,7 +152,7 @@ img {
 }
 
 /* ------------------- Lucky Video Overlay ------------------- */
-#luckyVideoOverlay {
+#luckyVideoOverlay, #lastVideoOverlay {
   display: none;
   position: fixed;
   top:0;
@@ -172,11 +166,11 @@ img {
   opacity: 0;
   transition: opacity 1s ease;
 }
-#luckyVideoOverlay.show {
+#luckyVideoOverlay.show, #lastVideoOverlay.show {
   display: flex;
   opacity: 1;
 }
-#luckyVideoOverlay video {
+#luckyVideoOverlay video, #lastVideoOverlay video {
   max-width:90%;
   max-height:90%;
 }
@@ -211,8 +205,7 @@ img {
 <a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
 <button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
 <button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
-<!-- New button for Goodbye.mp4 -->
-<button class="gift-button last" onclick="playLast()">💌 open me last 💌</button>
+<button class="gift-button last" onclick="playLast()">open me last 🎬</button>
 
 </div>
 
@@ -220,7 +213,12 @@ img {
 
 <!-- Lucky Video Overlay -->
 <div id="luckyVideoOverlay">
-  <video id="luckyVideo" src="surprise.mp4"></video>
+  <video id="luckyVideo" src="surprise.mp4" controls></video>
+</div>
+
+<!-- Last Video Overlay -->
+<div id="lastVideoOverlay">
+  <video id="lastVideo" src="goodbye.mp4" controls></video>
 </div>
 
 <script>
@@ -251,7 +249,6 @@ for(let i=0;i<23;i++){
   candle.appendChild(flame);
   cake.appendChild(candle);
 
-  // Tap to blow out
   candle.addEventListener('click', () => blowCandle(flame, candle));
 }
 
@@ -268,7 +265,7 @@ if(window.DeviceMotionEvent){
     const acc = event.accelerationIncludingGravity;
     const delta = Math.abs(acc.x-lastX)+Math.abs(acc.y-lastY)+Math.abs(acc.z-lastZ);
     if(delta > 25){
-      document.querySelectorAll('.flame').forEach((flame, i)=>{
+      document.querySelectorAll('.flame').forEach((flame)=>{
         if(flame.style.display !== 'none'){
           flame.style.display='none';
           createSmoke(flame.parentElement);
@@ -290,7 +287,7 @@ function createSmoke(candle){
   setTimeout(()=>smoke.remove(),2000);
 }
 
-/* Lucky Dip video with cinematic fade */
+/* Lucky Dip video */
 function playLucky(){
   const overlay = document.getElementById('luckyVideoOverlay');
   const video = document.getElementById('luckyVideo');
@@ -298,16 +295,14 @@ function playLucky(){
   video.currentTime = 0;
   video.play();
   video.style.opacity = 0;
-  
-  // Fade-in
+
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
     if(op<1) video.style.opacity = op + 0.05;
     else clearInterval(fadeIn);
   },50);
-  
+
   video.onended = () => {
-    // Fade-out
     let fadeOut = setInterval(()=>{
       let op = parseFloat(video.style.opacity);
       if(op>0) video.style.opacity = op - 0.05;
@@ -319,30 +314,30 @@ function playLucky(){
   };
 }
 
-/* New function for “open me last” button */
+/* Last video button */
 function playLast(){
-  const overlay = document.createElement('div');
-  overlay.id = 'lastVideoOverlay';
-  overlay.style = `
-    display:flex; justify-content:center; align-items:center;
-    position:fixed; top:0; left:0; width:100%; height:100%;
-    background: rgba(0,0,0,0.95); z-index:9999; opacity:0; transition:opacity 1s ease;
-  `;
-  const video = document.createElement('video');
-  video.src = 'goodbye.mp4';
-  video.style.maxWidth = '90%';
-  video.style.maxHeight = '90%';
-  video.autoplay = true;
-  overlay.appendChild(video);
-  document.body.appendChild(overlay);
-  
-  // Fade-in
-  setTimeout(()=>overlay.style.opacity=1, 50);
+  const overlay = document.getElementById('lastVideoOverlay');
+  const video = document.getElementById('lastVideo');
+  overlay.classList.add('show');
+  video.currentTime = 0;
+  video.play();
+  video.style.opacity = 0;
+
+  let fadeIn = setInterval(()=>{
+    let op = parseFloat(video.style.opacity);
+    if(op<1) video.style.opacity = op + 0.05;
+    else clearInterval(fadeIn);
+  },50);
 
   video.onended = () => {
-    // Fade-out
-    overlay.style.opacity = 0;
-    setTimeout(()=>overlay.remove(), 1000);
+    let fadeOut = setInterval(()=>{
+      let op = parseFloat(video.style.opacity);
+      if(op>0) video.style.opacity = op - 0.05;
+      else {
+        clearInterval(fadeOut);
+        overlay.classList.remove('show');
+      }
+    },50);
   };
 }
 </script>
