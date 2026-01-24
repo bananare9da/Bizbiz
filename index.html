@@ -91,6 +91,7 @@ img {
 .reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
 .secret { background: #6a0dad; }
 .lucky { background: gold; color: black; }
+.last { background: #00ccff; color: black; }
 
 /* ------------------- Candles ------------------- */
 .cake {
@@ -157,9 +158,8 @@ img {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  flex-direction: column;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 1s ease;
 }
 #luckyVideoOverlay.show, #lastVideoOverlay.show {
   display: flex;
@@ -168,9 +168,6 @@ img {
 #luckyVideoOverlay video, #lastVideoOverlay video {
   max-width:90%;
   max-height:90%;
-}
-#lastVideoOverlay #videoError {
-  color:white; font-size:1.5rem; display:none; text-align:center; margin-top:20px;
 }
 </style>
 </head>
@@ -191,7 +188,7 @@ img {
   note:shake your phone :).....................
   
   Since we cannot meet, this is my virtual gift to you.<br><br>
-  I wanted something physical, but I know that the idea of us meeting is repulsive to you. therefore this is what I could give without you holding back.<br><br>
+  I wanted something physical, but I know that the idea of us meeting may seem repulsive to you. therefore this is what I could give without you holding back.<br><br>
   Every year matters.<br>
   So do you.
 </div>
@@ -203,8 +200,7 @@ img {
 <a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
 <button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
 <button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
-<!-- New button for last video -->
-<button class="gift-button lucky" onclick="playLastVideo()">open me last 🎬</button>
+<button class="gift-button last" onclick="playLast()">open me last</button>
 
 </div>
 
@@ -212,13 +208,12 @@ img {
 
 <!-- Lucky Video Overlay -->
 <div id="luckyVideoOverlay">
-  <video id="luckyVideo" src="surprise.mp4"></video>
+  <video id="luckyVideo" src="surprise.mp4" type="video/mp4"></video>
 </div>
 
 <!-- Last Video Overlay -->
 <div id="lastVideoOverlay">
-  <video id="lastVideo" src="goodbye.mp4" controls></video>
-  <div id="videoError">⚠️ Video not found. Make sure goodbye.mp4 is in the same folder as this HTML file.</div>
+  <video id="lastVideo" src="goodbye.mp4" type="video/mp4"></video>
 </div>
 
 <script>
@@ -288,7 +283,7 @@ function createSmoke(candle){
   setTimeout(()=>smoke.remove(),2000);
 }
 
-/* Lucky Dip video with cinematic fade */
+/* Lucky Dip video overlay */
 function playLucky(){
   const overlay = document.getElementById('luckyVideoOverlay');
   const video = document.getElementById('luckyVideo');
@@ -297,7 +292,6 @@ function playLucky(){
   video.play();
   video.style.opacity = 0;
   
-  // Fade-in
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
     if(op<1) video.style.opacity = op + 0.05;
@@ -305,7 +299,6 @@ function playLucky(){
   },50);
   
   video.onended = () => {
-    // Fade-out
     let fadeOut = setInterval(()=>{
       let op = parseFloat(video.style.opacity);
       if(op>0) video.style.opacity = op - 0.05;
@@ -317,33 +310,25 @@ function playLucky(){
   };
 }
 
-/* Last Video (goodbye.mp4) with overlay */
-function playLastVideo(){
+/* Last video overlay */
+function playLast(){
   const overlay = document.getElementById('lastVideoOverlay');
   const video = document.getElementById('lastVideo');
-  const errorMsg = document.getElementById('videoError');
-  
   overlay.classList.add('show');
-  errorMsg.style.display = 'none';
   video.currentTime = 0;
-  
-  // Fade-in
+  video.play();
   video.style.opacity = 0;
+  
   let fadeIn = setInterval(()=>{
     let op = parseFloat(video.style.opacity);
-    if(op < 1) video.style.opacity = op + 0.05;
+    if(op<1) video.style.opacity = op + 0.05;
     else clearInterval(fadeIn);
   },50);
   
-  // Play video or show error
-  video.oncanplay = () => video.play();
-  video.onerror = () => errorMsg.style.display = 'block';
-  
-  // Fade-out after end
   video.onended = () => {
     let fadeOut = setInterval(()=>{
       let op = parseFloat(video.style.opacity);
-      if(op > 0) video.style.opacity = op - 0.05;
+      if(op>0) video.style.opacity = op - 0.05;
       else {
         clearInterval(fadeOut);
         overlay.classList.remove('show');
