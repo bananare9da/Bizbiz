@@ -6,25 +6,23 @@
 <title>Happy bizbizday 💖</title>
 
 <style>
-/* ------------------- Body ------------------- */
 body {
   margin: 0;
   padding: 0;
   background: radial-gradient(circle at top, #0b0b1e, #000);
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   overflow-x: hidden;
   text-align: center;
 }
 
-/* ------------------- Stars ------------------- */
+/* Stars */
 .star {
   position: absolute;
   width: 3px;
   height: 3px;
   background: white;
   border-radius: 50%;
-  opacity: 0.8;
   animation: twinkle 3s infinite;
 }
 @keyframes twinkle {
@@ -32,7 +30,7 @@ body {
   50%{opacity:1;}
 }
 
-/* ------------------- Container ------------------- */
+/* Container */
 .container {
   position: relative;
   z-index: 10;
@@ -41,7 +39,6 @@ body {
 
 h1 {
   font-size: 3rem;
-  margin-bottom: 20px;
   color: #ff4d6d;
   text-shadow: 0 0 15px #ff4d6d;
 }
@@ -50,50 +47,37 @@ img {
   width: 80%;
   max-width: 300px;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.4);
   margin-bottom: 20px;
 }
 
-/* ------------------- Intro Text ------------------- */
+/* Intro */
 .intro-text {
   max-width:600px;
   margin:20px auto;
   font-size:1.2rem;
   line-height:1.6;
-  color:#fff;
-  text-shadow:0 0 5px #ff4d6d;
 }
 
-/* ------------------- Buttons ------------------- */
+/* Buttons */
 .gift-button {
   display: block;
   margin: 15px auto;
   padding: 15px 25px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: white;
-  background: #ff4d6d;
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  box-shadow: 0 0 15px rgba(255,77,109,0.6);
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-.gift-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255,77,109,1);
 }
 
-/* Different button styles */
-.poetry { background: #ff6b81; }
-.story { background: #fcd34d; color: #000; }
-.reel { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
-.secret { background: #6a0dad; }
-.lucky { background: gold; color: black; }
-.last { background: #1e90ff; }
+.poetry { background:#ff6b81; color:white; }
+.story { background:#fcd34d; color:black; }
+.reel { background:#dc2743; color:white; }
+.secret { background:#6a0dad; color:white; }
+.lucky { background:gold; color:black; }
+.last { background:#1e90ff; color:white; }
 
-/* ------------------- Candles ------------------- */
+/* Cake */
 .cake {
   display: flex;
   justify-content: center;
@@ -106,8 +90,7 @@ img {
 .candle {
   width: 10px;
   height: 40px;
-  background: linear-gradient(#ffb703, #fb8500);
-  border-radius: 3px;
+  background: orange;
   position: relative;
   cursor: pointer;
 }
@@ -119,53 +102,29 @@ img {
   transform: translateX(-50%);
   width: 10px;
   height: 14px;
-  background: radial-gradient(circle, #ffd166, #ff8800);
-  border-radius: 50% 50% 50% 50%;
-  animation: flicker 0.2s infinite alternate;
-  box-shadow: 0 0 10px rgba(255,200,100,0.9);
-}
-@keyframes flicker {
-  from { transform: translateX(-50%) scale(1); opacity: 0.9; }
-  to { transform: translateX(-50%) scale(1.15); opacity: 1; }
-}
-
-/* ------------------- Smoke ------------------- */
-.smoke {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: radial-gradient(circle, #ccc, transparent);
+  background: gold;
   border-radius: 50%;
-  opacity: 0.6;
-  animation: rise 2s forwards;
-  pointer-events: none;
-}
-@keyframes rise {
-  0% { transform: translateY(0) scale(0.5); opacity: 0.6; }
-  50% { opacity: 0.4; }
-  100% { transform: translateY(-60px) scale(1); opacity: 0; }
 }
 
-/* ------------------- Video Overlay ------------------- */
+/* Video Overlay */
 #videoOverlay {
   display: none;
   position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
+  inset: 0;
   background: rgba(0,0,0,0.95);
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
-#videoOverlay iframe {
-  width: 90%;
-  height: 90%;
-  border: none;
-}
+
 #videoOverlay.show {
   display: flex;
+}
+
+#videoOverlay iframe,
+#videoOverlay video {
+  width: 90%;
+  height: 90%;
 }
 </style>
 </head>
@@ -176,129 +135,89 @@ img {
 
 <h1>Happy 23rd, Katkouta 💖</h1>
 
-<img src="Us.jpg" alt="Us 💕">
+<img src="Us.jpg" alt="Us">
 
-<!-- 🎂 23 Candles -->
 <div class="cake" id="cake"></div>
 
-<!-- ------------------- Intro Text ------------------- -->
 <div class="intro-text">
-  note:shake your phone :).....................
-  
-  Since we cannot meet, this is my virtual gift to you.<br><br>
-  I wanted something physical, but I know that the idea of us meeting is repulsive to you. therefore this is what I could give without you holding back.<br><br>
-  Every year matters.<br>
-  So do you.
+note: shake your phone :)<br><br>
+Since we cannot meet, this is my virtual gift to you.<br><br>
+Every year matters.<br>
+So do you.
 </div>
 
-<!-- 💌 Gift buttons -->
-<a href="https://docs.google.com/document/d/1Lt8xaQHEnwsDcisuQUpw1Koa3Ix7w3FZJg90FKUZ6lc/edit?usp=drivesdk" target="_blank" class="gift-button poetry">THE book</a>
+<a href="https://docs.google.com/document/d/1Lt8xaQHEnwsDcisuQUpw1Koa3Ix7w3FZJg90FKUZ6lc/edit" target="_blank" class="gift-button poetry">THE book</a>
+
 <a href="https://amapof.us/map?mou=c2de91a8-aa47-4f8b-9224-ab949def7dfd" target="_blank" class="gift-button story">The beginning of the story</a>
-<a href="https://www.instagram.com/reel/DSk6MniAhhm/?igsh=MWtpamVwamc0cGdpZw==" target="_blank" class="gift-button reel">He said it not me 🤷🏽‍♂️</a>
-<a href="secret.html" class="gift-button secret">no hard feelings❤️</a>
-<button onclick="playMusic()" class="gift-button" style="background:#ff4d6d;">💖 Tap to play the 8nee 💖</button>
+
+<a href="https://www.instagram.com/reel/DSk6MniAhhm/" target="_blank" class="gift-button reel">He said it not me 🤷🏽‍♂️</a>
+
+<a href="secret.html" class="gift-button secret">no hard feelings ❤️</a>
+
+<button class="gift-button" onclick="playMusic()">💖 Tap to play the 8nee 💖</button>
+
 <button class="gift-button lucky" onclick="playLucky()">🎉 just how??? 🎉</button>
+
 <button class="gift-button last" onclick="openLast()">open me last 🎬</button>
 
 </div>
 
 <audio id="music" src="birthday.mp3"></audio>
 
-<!-- ------------------- Video Overlay ------------------- -->
-<div id="videoOverlay">
-  <iframe id="lastVideo" src="" allowfullscreen></iframe>
-</div>
+<!-- Overlay -->
+<div id="videoOverlay"></div>
 
 <script>
-/* 🎵 Play music */
-function playMusic() {
-  const music = document.getElementById("music");
-  music.play();
+/* Music */
+function playMusic(){
+  document.getElementById("music").play();
 }
 
-/* ✨ Floating stars */
-function createStar() {
-  const star = document.createElement('div');
-  star.className = 'star';
-  star.style.left = Math.random() * 100 + 'vw';
-  star.style.top = Math.random() * 100 + 'vh';
-  document.body.appendChild(star);
-  setTimeout(()=>star.remove(), 5000);
-}
-setInterval(createStar, 200);
-
-/* 🎂 Create 23 candles */
+/* Candles */
 const cake = document.getElementById("cake");
 for(let i=0;i<23;i++){
-  const candle = document.createElement('div');
-  candle.className = 'candle';
-  const flame = document.createElement('div');
-  flame.className = 'flame';
-  candle.appendChild(flame);
-  cake.appendChild(candle);
-
-  // Tap to blow out
-  candle.addEventListener('click', () => blowCandle(flame, candle));
+  const c = document.createElement("div");
+  c.className = "candle";
+  const f = document.createElement("div");
+  f.className = "flame";
+  c.appendChild(f);
+  c.onclick = ()=>f.style.display="none";
+  cake.appendChild(c);
 }
 
-// Blow candle function
-function blowCandle(flame, candle) {
-  flame.style.display = 'none';
-  createSmoke(candle);
-}
+/* Stars */
+setInterval(()=>{
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),3000);
+},200);
 
-// Shake to blow
-if(window.DeviceMotionEvent){
-  let lastX=0, lastY=0, lastZ=0;
-  window.addEventListener('devicemotion', event => {
-    const acc = event.accelerationIncludingGravity;
-    const delta = Math.abs(acc.x-lastX)+Math.abs(acc.y-lastY)+Math.abs(acc.z-lastZ);
-    if(delta > 25){
-      document.querySelectorAll('.flame').forEach((flame)=>{
-        if(flame.style.display !== 'none'){
-          flame.style.display='none';
-          createSmoke(flame.parentElement);
-        }
-      });
-    }
-    lastX=acc.x; lastY=acc.y; lastZ=acc.z;
-  });
-}
-
-// Smoke
-function createSmoke(candle){
-  const smoke = document.createElement('div');
-  smoke.className='smoke';
-  const rect = candle.getBoundingClientRect();
-  smoke.style.left = rect.left + rect.width/2 + 'px';
-  smoke.style.top = rect.top + 'px';
-  document.body.appendChild(smoke);
-  setTimeout(()=>smoke.remove(),2000);
-}
-
-/* 🎥 Lucky button overlay (previous) */
+/* JUST HOW??? → LOCAL MP4 */
 function playLucky(){
-  const overlay = document.getElementById('videoOverlay');
-  const iframe = document.getElementById('lastVideo');
-  iframe.src = "https://drive.google.com/file/d/1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE/preview"; // previous surprise link can go here if needed
-  overlay.classList.add('show');
+  const o=document.getElementById("videoOverlay");
+  o.innerHTML = `
+    <video src="surprise.mp4" controls autoplay></video>
+  `;
+  o.classList.add("show");
 }
 
-/* 🎬 Open me last button overlay */
+/* OPEN ME LAST → GOOGLE DRIVE */
 function openLast(){
-  const overlay = document.getElementById('videoOverlay');
-  const iframe = document.getElementById('lastVideo');
-  iframe.src = "https://drive.google.com/file/d/1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE/preview"; // your final Google Drive video
-  overlay.classList.add('show');
+  const o=document.getElementById("videoOverlay");
+  o.innerHTML = `
+    <iframe src="https://drive.google.com/file/d/1Y-IHlBCgHdpD06RAd2xeVEjQXR6T90BE/preview" allowfullscreen></iframe>
+  `;
+  o.classList.add("show");
 }
 
-/* Click outside to close overlay */
-document.getElementById('videoOverlay').addEventListener('click',()=>{
-  const overlay = document.getElementById('videoOverlay');
-  const iframe = document.getElementById('lastVideo');
-  overlay.classList.remove('show');
-  iframe.src = ""; // stop video
-});
+/* Close overlay */
+document.getElementById("videoOverlay").onclick = function(){
+  this.classList.remove("show");
+  this.innerHTML = "";
+};
 </script>
 
 </body>
